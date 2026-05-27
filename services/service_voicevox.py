@@ -22,6 +22,7 @@ logger = logging_utils.get_child_logger(__name__)
 class VOICEVOX(service.ServiceBase):
     def __init__(self):
         service.ServiceBase.__init__(self)
+        self._speakers: list[Speaker] = []
         self._voices: list[voice.TtsVoice_v3] = [
             voice.TtsVoice_v3(
                 name='VOICEVOX not running!',
@@ -42,37 +43,12 @@ class VOICEVOX(service.ServiceBase):
     def service_fee(self) -> constants.ServiceFee:
         return constants.ServiceFee.free
 
-    def _speaker(self, speaker: dict) -> voice.TtsVoice_v3:
-        styles = {style_dict.get(style['name'], style['name']): style['id'] for style in speaker['styles']}
-        options = {
-            'style': dict(type='list', values=list(styles.keys()), default=next(iter(styles))),
-            'speedScale': dict(type='number', min=0.5, max=2., default=1.),
-            'pitchScale': dict(type='number', min=-0.15, max=0.15, default=0.),
-            'intonationScale': dict(type='number', min=0., max=2., default=1.),
-            'volumeScale': dict(type='number', min=0., max=1., default=1.),
-            'prePhonemeLength': dict(type='number', min=0., max=1., default=0.2),
-            'postPhonemeLength': dict(type='number', min=0., max=1., default=0.3),
-        }
-        name, gender = speaker_dict.get(speaker['name'], (speaker['name'], constants.Gender.Any))
-        return voice.TtsVoice_v3(
-            name=name,
-            gender=gender,
-            audio_languages=[languages.AudioLanguage.ja_JP],
-            service=self.name,
-            service_fee=self.service_fee,
-            voice_key={
-                'speaker_uuid': speaker['speaker_uuid'],
-                'style_id': tuple(styles.items()),
-                'defaults': tuple({k: v['default'] for k, v in options.items()}.items())
-            },
-            options=options
-        )
-
     def voice_list(self):
         try:
             if len(self._voices) == 1:
                 speakers = self._request('', '', requests.get, 'speakers')
-                self._voices = [self._speaker(_) for _ in speakers.json()]
+                self._speakers = {_['speaker_uuid']: Speaker(self, _) for _ in speakers.json()}
+                self._voices = [_.voice for _ in self._speakers.values()]
         except errors.ServiceRequestError:
             return self._voices  # we assume the container isn't running
         except Exception as e:
@@ -98,13 +74,16 @@ class VOICEVOX(service.ServiceBase):
 
     def get_tts_audio(self, source_text, voice: voice.TtsVoice_v3, voice_options) -> bytes:
         try:
-            options = dict(voice.voice_key['defaults']) | voice_options
-            speaker = dict(voice.voice_key['style_id'])[options.pop('style')]
+            speaker_uuid = voice.voice_key['speaker_uuid']
+            speaker = self._speakers[speaker_uuid]
+
+            options = speaker.defaults | voice_options
+            style_id = speaker.get_style_id(options.pop('style'))
             preset = {
                 'id': 0,
                 'name': 'hyper-tts',
-                'speaker_uuid': voice.voice_key['speaker_uuid'],
-                'style_id': speaker,
+                'speaker_uuid': speaker_uuid,
+                'style_id': style_id,
                 'pauseLength': 0,
                 'pauseLengthScale': 1,
                 **options
@@ -116,7 +95,7 @@ class VOICEVOX(service.ServiceBase):
             if query == {'detail': 'Internal Server Error'}:
                 raise errors.ServiceInputError(source_text, voice, 'Internal Server Error')
 
-            audio = self._request(*svp, 'synthesis', params={'speaker': speaker}, json=query, timeout=30).content
+            audio = self._request(*svp, 'synthesis', params={'speaker': style_id}, json=query, timeout=30).content
 
             with tempfile.TemporaryDirectory(prefix='hypertts_voicevox_') as tmpdir:
                 wav_path = pathlib.Path(tmpdir) / 'audio.wav'
@@ -129,6 +108,35 @@ class VOICEVOX(service.ServiceBase):
         except Exception as e:
             logger.error(e)
             raise
+
+
+class Speaker:
+    def __init__(self, service: VOICEVOX, speaker: dict):
+        self._styles = {style_dict.get(style['name'], style['name']): style['id'] for style in speaker['styles']}
+        options = {
+            'style': dict(type='list', values=list(self._styles.keys()), default=next(iter(self._styles))),
+            'speedScale': dict(type='number', min=0.5, max=2., default=1.),
+            'pitchScale': dict(type='number', min=-0.15, max=0.15, default=0.),
+            'intonationScale': dict(type='number', min=0., max=2., default=1.),
+            'volumeScale': dict(type='number', min=0., max=1., default=1.),
+            'prePhonemeLength': dict(type='number', min=0., max=1., default=0.2),
+            'postPhonemeLength': dict(type='number', min=0., max=1., default=0.3),
+        }
+        self.defaults = {k: v['default'] for k, v in options.items()}
+
+        name, gender = speaker_dict.get(speaker['name'], (speaker['name'], constants.Gender.Any))
+        self.voice = voice.TtsVoice_v3(
+            name=name,
+            gender=gender,
+            audio_languages=[languages.AudioLanguage.ja_JP],
+            service=service.name,
+            service_fee=service.service_fee,
+            voice_key=dict(speaker_uuid=speaker['speaker_uuid']),
+            options=options
+        )
+
+    def get_style_id(self, style):
+        return self._styles[style]
 
 
 style_dict = {
