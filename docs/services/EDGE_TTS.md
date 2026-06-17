@@ -24,7 +24,7 @@ edge-tts --list-voices | head
 
 ### Installation
 
-Copy `service_edge_tts.py` to your HyperTTS services directory (see [README](../README.md) for paths).
+Copy `service_edge_tts.py` to your HyperTTS services directory (see [README](../../README.md) for paths).
 
 ### Usage
 
