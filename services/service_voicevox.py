@@ -23,6 +23,7 @@ class VOICEVOX(service.ServiceBase):
     def __init__(self):
         service.ServiceBase.__init__(self)
         self._speakers: list[Speaker] = []
+        self._presets = None
         self._voices: list[voice.TtsVoice_v3] = [
             voice.TtsVoice_v3(
                 name='VOICEVOX not running!',
@@ -88,6 +89,11 @@ class VOICEVOX(service.ServiceBase):
                 'pauseLengthScale': 1,
                 **options
             }
+
+            if self._presets is None:
+                self._presets = self._request('', '', requests.get, 'presets').json()
+                if not self._presets:
+                    self._request('', '', requests.post, 'add_preset', json=preset, timeout=5)
 
             svp = source_text, voice, requests.post
             self._request(*svp, 'update_preset', json=preset, timeout=5)
