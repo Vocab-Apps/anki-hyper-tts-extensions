@@ -1,0 +1,3069 @@
+{
+  "models": [
+    {
+      "available": true,
+      "display_name": "Canopy Labs: Orpheus 3B",
+      "id": "canopylabs/orpheus-3b-0.1-ft",
+      "live_name": "Canopy Labs: Orpheus 3B",
+      "pricing": {
+        "completion": "0",
+        "prompt": "0.000007"
+      },
+      "short": "Orpheus 3B",
+      "voices": [
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "tara",
+          "voice_key": "tara"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "leah",
+          "voice_key": "leah"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "jess",
+          "voice_key": "jess"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "leo",
+          "voice_key": "leo"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "dan",
+          "voice_key": "dan"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "mia",
+          "voice_key": "mia"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "zac",
+          "voice_key": "zac"
+        }
+      ]
+    },
+    {
+      "available": true,
+      "display_name": "Deepgram: Aura-2",
+      "id": "deepgram/aura-2",
+      "live_name": "Deepgram: Aura-2",
+      "pricing": {
+        "completion": "0",
+        "prompt": "0.00003"
+      },
+      "short": "Aura-2",
+      "voices": [
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-thalia-en",
+          "voice_key": "aura-2-thalia-en"
+        },
+        {
+          "audio_languages": [
+            "fr_FR"
+          ],
+          "gender": "Any",
+          "name": "aura-2-agathe-fr",
+          "voice_key": "aura-2-agathe-fr"
+        },
+        {
+          "audio_languages": [
+            "es_ES"
+          ],
+          "gender": "Any",
+          "name": "aura-2-agustina-es",
+          "voice_key": "aura-2-agustina-es"
+        },
+        {
+          "audio_languages": [
+            "es_ES"
+          ],
+          "gender": "Any",
+          "name": "aura-2-alvaro-es",
+          "voice_key": "aura-2-alvaro-es"
+        },
+        {
+          "audio_languages": [
+            "ja_JP"
+          ],
+          "gender": "Any",
+          "name": "aura-2-ama-ja",
+          "voice_key": "aura-2-ama-ja"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-amalthea-en",
+          "voice_key": "aura-2-amalthea-en"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-andromeda-en",
+          "voice_key": "aura-2-andromeda-en"
+        },
+        {
+          "audio_languages": [
+            "es_ES"
+          ],
+          "gender": "Any",
+          "name": "aura-2-antonia-es",
+          "voice_key": "aura-2-antonia-es"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-apollo-en",
+          "voice_key": "aura-2-apollo-en"
+        },
+        {
+          "audio_languages": [
+            "es_ES"
+          ],
+          "gender": "Any",
+          "name": "aura-2-aquila-es",
+          "voice_key": "aura-2-aquila-es"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-arcas-en",
+          "voice_key": "aura-2-arcas-en"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-aries-en",
+          "voice_key": "aura-2-aries-en"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-asteria-en",
+          "voice_key": "aura-2-asteria-en"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-athena-en",
+          "voice_key": "aura-2-athena-en"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-atlas-en",
+          "voice_key": "aura-2-atlas-en"
+        },
+        {
+          "audio_languages": [
+            "de_DE"
+          ],
+          "gender": "Any",
+          "name": "aura-2-aurelia-de",
+          "voice_key": "aura-2-aurelia-de"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-aurora-en",
+          "voice_key": "aura-2-aurora-en"
+        },
+        {
+          "audio_languages": [
+            "nl_NL"
+          ],
+          "gender": "Any",
+          "name": "aura-2-beatrix-nl",
+          "voice_key": "aura-2-beatrix-nl"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-callista-en",
+          "voice_key": "aura-2-callista-en"
+        },
+        {
+          "audio_languages": [
+            "es_ES"
+          ],
+          "gender": "Any",
+          "name": "aura-2-carina-es",
+          "voice_key": "aura-2-carina-es"
+        },
+        {
+          "audio_languages": [
+            "es_ES"
+          ],
+          "gender": "Any",
+          "name": "aura-2-celeste-es",
+          "voice_key": "aura-2-celeste-es"
+        },
+        {
+          "audio_languages": [
+            "it_IT"
+          ],
+          "gender": "Any",
+          "name": "aura-2-cesare-it",
+          "voice_key": "aura-2-cesare-it"
+        },
+        {
+          "audio_languages": [
+            "it_IT"
+          ],
+          "gender": "Any",
+          "name": "aura-2-cinzia-it",
+          "voice_key": "aura-2-cinzia-it"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-cora-en",
+          "voice_key": "aura-2-cora-en"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-cordelia-en",
+          "voice_key": "aura-2-cordelia-en"
+        },
+        {
+          "audio_languages": [
+            "nl_NL"
+          ],
+          "gender": "Any",
+          "name": "aura-2-cornelia-nl",
+          "voice_key": "aura-2-cornelia-nl"
+        },
+        {
+          "audio_languages": [
+            "nl_NL"
+          ],
+          "gender": "Any",
+          "name": "aura-2-daphne-nl",
+          "voice_key": "aura-2-daphne-nl"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-delia-en",
+          "voice_key": "aura-2-delia-en"
+        },
+        {
+          "audio_languages": [
+            "it_IT"
+          ],
+          "gender": "Any",
+          "name": "aura-2-demetra-it",
+          "voice_key": "aura-2-demetra-it"
+        },
+        {
+          "audio_languages": [
+            "es_ES"
+          ],
+          "gender": "Any",
+          "name": "aura-2-diana-es",
+          "voice_key": "aura-2-diana-es"
+        },
+        {
+          "audio_languages": [
+            "it_IT"
+          ],
+          "gender": "Any",
+          "name": "aura-2-dionisio-it",
+          "voice_key": "aura-2-dionisio-it"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-draco-en",
+          "voice_key": "aura-2-draco-en"
+        },
+        {
+          "audio_languages": [
+            "ja_JP"
+          ],
+          "gender": "Any",
+          "name": "aura-2-ebisu-ja",
+          "voice_key": "aura-2-ebisu-ja"
+        },
+        {
+          "audio_languages": [
+            "de_DE"
+          ],
+          "gender": "Any",
+          "name": "aura-2-elara-de",
+          "voice_key": "aura-2-elara-de"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-electra-en",
+          "voice_key": "aura-2-electra-en"
+        },
+        {
+          "audio_languages": [
+            "it_IT"
+          ],
+          "gender": "Any",
+          "name": "aura-2-elio-it",
+          "voice_key": "aura-2-elio-it"
+        },
+        {
+          "audio_languages": [
+            "es_ES"
+          ],
+          "gender": "Any",
+          "name": "aura-2-estrella-es",
+          "voice_key": "aura-2-estrella-es"
+        },
+        {
+          "audio_languages": [
+            "de_DE"
+          ],
+          "gender": "Any",
+          "name": "aura-2-fabian-de",
+          "voice_key": "aura-2-fabian-de"
+        },
+        {
+          "audio_languages": [
+            "it_IT"
+          ],
+          "gender": "Any",
+          "name": "aura-2-flavio-it",
+          "voice_key": "aura-2-flavio-it"
+        },
+        {
+          "audio_languages": [
+            "ja_JP"
+          ],
+          "gender": "Any",
+          "name": "aura-2-fujin-ja",
+          "voice_key": "aura-2-fujin-ja"
+        },
+        {
+          "audio_languages": [
+            "es_ES"
+          ],
+          "gender": "Any",
+          "name": "aura-2-gloria-es",
+          "voice_key": "aura-2-gloria-es"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-harmonia-en",
+          "voice_key": "aura-2-harmonia-en"
+        },
+        {
+          "audio_languages": [
+            "fr_FR"
+          ],
+          "gender": "Any",
+          "name": "aura-2-hector-fr",
+          "voice_key": "aura-2-hector-fr"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-helena-en",
+          "voice_key": "aura-2-helena-en"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-hera-en",
+          "voice_key": "aura-2-hera-en"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-hermes-en",
+          "voice_key": "aura-2-hermes-en"
+        },
+        {
+          "audio_languages": [
+            "nl_NL"
+          ],
+          "gender": "Any",
+          "name": "aura-2-hestia-nl",
+          "voice_key": "aura-2-hestia-nl"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-hyperion-en",
+          "voice_key": "aura-2-hyperion-en"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-iris-en",
+          "voice_key": "aura-2-iris-en"
+        },
+        {
+          "audio_languages": [
+            "ja_JP"
+          ],
+          "gender": "Any",
+          "name": "aura-2-izanami-ja",
+          "voice_key": "aura-2-izanami-ja"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-janus-en",
+          "voice_key": "aura-2-janus-en"
+        },
+        {
+          "audio_languages": [
+            "es_ES"
+          ],
+          "gender": "Any",
+          "name": "aura-2-javier-es",
+          "voice_key": "aura-2-javier-es"
+        },
+        {
+          "audio_languages": [
+            "de_DE"
+          ],
+          "gender": "Any",
+          "name": "aura-2-julius-de",
+          "voice_key": "aura-2-julius-de"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-juno-en",
+          "voice_key": "aura-2-juno-en"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-jupiter-en",
+          "voice_key": "aura-2-jupiter-en"
+        },
+        {
+          "audio_languages": [
+            "de_DE"
+          ],
+          "gender": "Any",
+          "name": "aura-2-kara-de",
+          "voice_key": "aura-2-kara-de"
+        },
+        {
+          "audio_languages": [
+            "de_DE"
+          ],
+          "gender": "Any",
+          "name": "aura-2-lara-de",
+          "voice_key": "aura-2-lara-de"
+        },
+        {
+          "audio_languages": [
+            "nl_NL"
+          ],
+          "gender": "Any",
+          "name": "aura-2-lars-nl",
+          "voice_key": "aura-2-lars-nl"
+        },
+        {
+          "audio_languages": [
+            "nl_NL"
+          ],
+          "gender": "Any",
+          "name": "aura-2-leda-nl",
+          "voice_key": "aura-2-leda-nl"
+        },
+        {
+          "audio_languages": [
+            "it_IT"
+          ],
+          "gender": "Any",
+          "name": "aura-2-livia-it",
+          "voice_key": "aura-2-livia-it"
+        },
+        {
+          "audio_languages": [
+            "es_ES"
+          ],
+          "gender": "Any",
+          "name": "aura-2-luciano-es",
+          "voice_key": "aura-2-luciano-es"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-luna-en",
+          "voice_key": "aura-2-luna-en"
+        },
+        {
+          "audio_languages": [
+            "it_IT"
+          ],
+          "gender": "Any",
+          "name": "aura-2-maia-it",
+          "voice_key": "aura-2-maia-it"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-mars-en",
+          "voice_key": "aura-2-mars-en"
+        },
+        {
+          "audio_languages": [
+            "it_IT"
+          ],
+          "gender": "Any",
+          "name": "aura-2-melia-it",
+          "voice_key": "aura-2-melia-it"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-minerva-en",
+          "voice_key": "aura-2-minerva-en"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-neptune-en",
+          "voice_key": "aura-2-neptune-en"
+        },
+        {
+          "audio_languages": [
+            "es_ES"
+          ],
+          "gender": "Any",
+          "name": "aura-2-nestor-es",
+          "voice_key": "aura-2-nestor-es"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-odysseus-en",
+          "voice_key": "aura-2-odysseus-en"
+        },
+        {
+          "audio_languages": [
+            "es_ES"
+          ],
+          "gender": "Any",
+          "name": "aura-2-olivia-es",
+          "voice_key": "aura-2-olivia-es"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-ophelia-en",
+          "voice_key": "aura-2-ophelia-en"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-orion-en",
+          "voice_key": "aura-2-orion-en"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-orpheus-en",
+          "voice_key": "aura-2-orpheus-en"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-pandora-en",
+          "voice_key": "aura-2-pandora-en"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-phoebe-en",
+          "voice_key": "aura-2-phoebe-en"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-pluto-en",
+          "voice_key": "aura-2-pluto-en"
+        },
+        {
+          "audio_languages": [
+            "nl_NL"
+          ],
+          "gender": "Any",
+          "name": "aura-2-rhea-nl",
+          "voice_key": "aura-2-rhea-nl"
+        },
+        {
+          "audio_languages": [
+            "nl_NL"
+          ],
+          "gender": "Any",
+          "name": "aura-2-roman-nl",
+          "voice_key": "aura-2-roman-nl"
+        },
+        {
+          "audio_languages": [
+            "nl_NL"
+          ],
+          "gender": "Any",
+          "name": "aura-2-sander-nl",
+          "voice_key": "aura-2-sander-nl"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-saturn-en",
+          "voice_key": "aura-2-saturn-en"
+        },
+        {
+          "audio_languages": [
+            "es_ES"
+          ],
+          "gender": "Any",
+          "name": "aura-2-selena-es",
+          "voice_key": "aura-2-selena-es"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-selene-en",
+          "voice_key": "aura-2-selene-en"
+        },
+        {
+          "audio_languages": [
+            "es_ES"
+          ],
+          "gender": "Any",
+          "name": "aura-2-silvia-es",
+          "voice_key": "aura-2-silvia-es"
+        },
+        {
+          "audio_languages": [
+            "es_ES"
+          ],
+          "gender": "Any",
+          "name": "aura-2-sirio-es",
+          "voice_key": "aura-2-sirio-es"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-theia-en",
+          "voice_key": "aura-2-theia-en"
+        },
+        {
+          "audio_languages": [
+            "ja_JP"
+          ],
+          "gender": "Any",
+          "name": "aura-2-uzume-ja",
+          "voice_key": "aura-2-uzume-ja"
+        },
+        {
+          "audio_languages": [
+            "es_ES"
+          ],
+          "gender": "Any",
+          "name": "aura-2-valerio-es",
+          "voice_key": "aura-2-valerio-es"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-vesta-en",
+          "voice_key": "aura-2-vesta-en"
+        },
+        {
+          "audio_languages": [
+            "de_DE"
+          ],
+          "gender": "Any",
+          "name": "aura-2-viktoria-de",
+          "voice_key": "aura-2-viktoria-de"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "aura-2-zeus-en",
+          "voice_key": "aura-2-zeus-en"
+        }
+      ]
+    },
+    {
+      "available": true,
+      "display_name": "Google: Gemini 3.1 Flash TTS Preview",
+      "id": "google/gemini-3.1-flash-tts-preview",
+      "live_name": "Google: Gemini 3.1 Flash TTS Preview",
+      "pricing": {
+        "completion": "0.00002",
+        "prompt": "0.000001"
+      },
+      "short": "Gemini 3.1 Flash TTS Preview",
+      "voices": [
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Zephyr",
+          "voice_key": "Zephyr"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Puck",
+          "voice_key": "Puck"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Charon",
+          "voice_key": "Charon"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Kore",
+          "voice_key": "Kore"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Fenrir",
+          "voice_key": "Fenrir"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Leda",
+          "voice_key": "Leda"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Orus",
+          "voice_key": "Orus"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Aoede",
+          "voice_key": "Aoede"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Callirrhoe",
+          "voice_key": "Callirrhoe"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Autonoe",
+          "voice_key": "Autonoe"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Enceladus",
+          "voice_key": "Enceladus"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Iapetus",
+          "voice_key": "Iapetus"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Umbriel",
+          "voice_key": "Umbriel"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Algieba",
+          "voice_key": "Algieba"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Despina",
+          "voice_key": "Despina"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Erinome",
+          "voice_key": "Erinome"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Algenib",
+          "voice_key": "Algenib"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Rasalgethi",
+          "voice_key": "Rasalgethi"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Laomedeia",
+          "voice_key": "Laomedeia"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Achernar",
+          "voice_key": "Achernar"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Alnilam",
+          "voice_key": "Alnilam"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Schedar",
+          "voice_key": "Schedar"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Gacrux",
+          "voice_key": "Gacrux"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Pulcherrima",
+          "voice_key": "Pulcherrima"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Achird",
+          "voice_key": "Achird"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Zubenelgenubi",
+          "voice_key": "Zubenelgenubi"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Vindemiatrix",
+          "voice_key": "Vindemiatrix"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Sadachbia",
+          "voice_key": "Sadachbia"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Sadaltager",
+          "voice_key": "Sadaltager"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "Sulafat",
+          "voice_key": "Sulafat"
+        }
+      ]
+    },
+    {
+      "available": true,
+      "display_name": "hexgrad: Kokoro 82M",
+      "id": "hexgrad/kokoro-82m",
+      "live_name": "hexgrad: Kokoro 82M",
+      "pricing": {
+        "completion": "0",
+        "prompt": "0.00000062"
+      },
+      "short": "Kokoro 82M",
+      "voices": [
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Female",
+          "name": "af_alloy",
+          "voice_key": "af_alloy"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Female",
+          "name": "af_aoede",
+          "voice_key": "af_aoede"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Female",
+          "name": "af_bella",
+          "voice_key": "af_bella"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Female",
+          "name": "af_heart",
+          "voice_key": "af_heart"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Female",
+          "name": "af_jessica",
+          "voice_key": "af_jessica"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Female",
+          "name": "af_kore",
+          "voice_key": "af_kore"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Female",
+          "name": "af_nicole",
+          "voice_key": "af_nicole"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Female",
+          "name": "af_nova",
+          "voice_key": "af_nova"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Female",
+          "name": "af_river",
+          "voice_key": "af_river"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Female",
+          "name": "af_sarah",
+          "voice_key": "af_sarah"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Female",
+          "name": "af_sky",
+          "voice_key": "af_sky"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Male",
+          "name": "am_adam",
+          "voice_key": "am_adam"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Male",
+          "name": "am_echo",
+          "voice_key": "am_echo"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Male",
+          "name": "am_eric",
+          "voice_key": "am_eric"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Male",
+          "name": "am_fenrir",
+          "voice_key": "am_fenrir"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Male",
+          "name": "am_liam",
+          "voice_key": "am_liam"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Male",
+          "name": "am_michael",
+          "voice_key": "am_michael"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Male",
+          "name": "am_onyx",
+          "voice_key": "am_onyx"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Male",
+          "name": "am_puck",
+          "voice_key": "am_puck"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Male",
+          "name": "am_santa",
+          "voice_key": "am_santa"
+        },
+        {
+          "audio_languages": [
+            "en_GB"
+          ],
+          "gender": "Female",
+          "name": "bf_alice",
+          "voice_key": "bf_alice"
+        },
+        {
+          "audio_languages": [
+            "en_GB"
+          ],
+          "gender": "Female",
+          "name": "bf_emma",
+          "voice_key": "bf_emma"
+        },
+        {
+          "audio_languages": [
+            "en_GB"
+          ],
+          "gender": "Female",
+          "name": "bf_isabella",
+          "voice_key": "bf_isabella"
+        },
+        {
+          "audio_languages": [
+            "en_GB"
+          ],
+          "gender": "Female",
+          "name": "bf_lily",
+          "voice_key": "bf_lily"
+        },
+        {
+          "audio_languages": [
+            "en_GB"
+          ],
+          "gender": "Male",
+          "name": "bm_daniel",
+          "voice_key": "bm_daniel"
+        },
+        {
+          "audio_languages": [
+            "en_GB"
+          ],
+          "gender": "Male",
+          "name": "bm_fable",
+          "voice_key": "bm_fable"
+        },
+        {
+          "audio_languages": [
+            "en_GB"
+          ],
+          "gender": "Male",
+          "name": "bm_george",
+          "voice_key": "bm_george"
+        },
+        {
+          "audio_languages": [
+            "en_GB"
+          ],
+          "gender": "Male",
+          "name": "bm_lewis",
+          "voice_key": "bm_lewis"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Female",
+          "name": "ef_dora",
+          "voice_key": "ef_dora"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Male",
+          "name": "em_alex",
+          "voice_key": "em_alex"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Male",
+          "name": "em_santa",
+          "voice_key": "em_santa"
+        },
+        {
+          "audio_languages": [
+            "fr_FR"
+          ],
+          "gender": "Female",
+          "name": "ff_siwis",
+          "voice_key": "ff_siwis"
+        },
+        {
+          "audio_languages": [
+            "hi_IN"
+          ],
+          "gender": "Female",
+          "name": "hf_alpha",
+          "voice_key": "hf_alpha"
+        },
+        {
+          "audio_languages": [
+            "hi_IN"
+          ],
+          "gender": "Female",
+          "name": "hf_beta",
+          "voice_key": "hf_beta"
+        },
+        {
+          "audio_languages": [
+            "hi_IN"
+          ],
+          "gender": "Male",
+          "name": "hm_omega",
+          "voice_key": "hm_omega"
+        },
+        {
+          "audio_languages": [
+            "hi_IN"
+          ],
+          "gender": "Male",
+          "name": "hm_psi",
+          "voice_key": "hm_psi"
+        },
+        {
+          "audio_languages": [
+            "it_IT"
+          ],
+          "gender": "Female",
+          "name": "if_sara",
+          "voice_key": "if_sara"
+        },
+        {
+          "audio_languages": [
+            "it_IT"
+          ],
+          "gender": "Male",
+          "name": "im_nicola",
+          "voice_key": "im_nicola"
+        },
+        {
+          "audio_languages": [
+            "ja_JP"
+          ],
+          "gender": "Female",
+          "name": "jf_alpha",
+          "voice_key": "jf_alpha"
+        },
+        {
+          "audio_languages": [
+            "ja_JP"
+          ],
+          "gender": "Female",
+          "name": "jf_gongitsune",
+          "voice_key": "jf_gongitsune"
+        },
+        {
+          "audio_languages": [
+            "ja_JP"
+          ],
+          "gender": "Female",
+          "name": "jf_nezumi",
+          "voice_key": "jf_nezumi"
+        },
+        {
+          "audio_languages": [
+            "ja_JP"
+          ],
+          "gender": "Female",
+          "name": "jf_tebukuro",
+          "voice_key": "jf_tebukuro"
+        },
+        {
+          "audio_languages": [
+            "ja_JP"
+          ],
+          "gender": "Male",
+          "name": "jm_kumo",
+          "voice_key": "jm_kumo"
+        },
+        {
+          "audio_languages": [
+            "pt_BR"
+          ],
+          "gender": "Female",
+          "name": "pf_dora",
+          "voice_key": "pf_dora"
+        },
+        {
+          "audio_languages": [
+            "pt_BR"
+          ],
+          "gender": "Male",
+          "name": "pm_alex",
+          "voice_key": "pm_alex"
+        },
+        {
+          "audio_languages": [
+            "pt_BR"
+          ],
+          "gender": "Male",
+          "name": "pm_santa",
+          "voice_key": "pm_santa"
+        },
+        {
+          "audio_languages": [
+            "zh_CN"
+          ],
+          "gender": "Female",
+          "name": "zf_xiaobei",
+          "voice_key": "zf_xiaobei"
+        },
+        {
+          "audio_languages": [
+            "zh_CN"
+          ],
+          "gender": "Female",
+          "name": "zf_xiaoni",
+          "voice_key": "zf_xiaoni"
+        },
+        {
+          "audio_languages": [
+            "zh_CN"
+          ],
+          "gender": "Female",
+          "name": "zf_xiaoxiao",
+          "voice_key": "zf_xiaoxiao"
+        },
+        {
+          "audio_languages": [
+            "zh_CN"
+          ],
+          "gender": "Female",
+          "name": "zf_xiaoyi",
+          "voice_key": "zf_xiaoyi"
+        },
+        {
+          "audio_languages": [
+            "zh_CN"
+          ],
+          "gender": "Male",
+          "name": "zm_yunjian",
+          "voice_key": "zm_yunjian"
+        },
+        {
+          "audio_languages": [
+            "zh_CN"
+          ],
+          "gender": "Male",
+          "name": "zm_yunxi",
+          "voice_key": "zm_yunxi"
+        },
+        {
+          "audio_languages": [
+            "zh_CN"
+          ],
+          "gender": "Male",
+          "name": "zm_yunxia",
+          "voice_key": "zm_yunxia"
+        },
+        {
+          "audio_languages": [
+            "zh_CN"
+          ],
+          "gender": "Male",
+          "name": "zm_yunyang",
+          "voice_key": "zm_yunyang"
+        }
+      ]
+    },
+    {
+      "available": true,
+      "display_name": "Microsoft: MAI-Voice-2",
+      "id": "microsoft/mai-voice-2",
+      "live_name": "Microsoft: MAI-Voice-2",
+      "pricing": {
+        "completion": "0",
+        "prompt": "0.000022"
+      },
+      "short": "MAI-Voice-2",
+      "voices": [
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "en-US-Harper:MAI-Voice-2",
+          "voice_key": "en-US-Harper:MAI-Voice-2"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "es-MX-Valeria:MAI-Voice-2",
+          "voice_key": "es-MX-Valeria:MAI-Voice-2"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "fr-FR-Soleil:MAI-Voice-2",
+          "voice_key": "fr-FR-Soleil:MAI-Voice-2"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "de-DE-Klaus:MAI-Voice-2",
+          "voice_key": "de-DE-Klaus:MAI-Voice-2"
+        }
+      ]
+    },
+    {
+      "available": true,
+      "display_name": "Mistral: Voxtral Mini TTS",
+      "id": "mistralai/voxtral-mini-tts-2603",
+      "live_name": "Mistral: Voxtral Mini TTS",
+      "pricing": {
+        "completion": "0",
+        "prompt": "0.000016"
+      },
+      "short": "Voxtral Mini TTS",
+      "voices": [
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "en_paul_sad",
+          "voice_key": "en_paul_sad"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "en_paul_neutral",
+          "voice_key": "en_paul_neutral"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "en_paul_happy",
+          "voice_key": "en_paul_happy"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "en_paul_frustrated",
+          "voice_key": "en_paul_frustrated"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "en_paul_excited",
+          "voice_key": "en_paul_excited"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "en_paul_confident",
+          "voice_key": "en_paul_confident"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "en_paul_cheerful",
+          "voice_key": "en_paul_cheerful"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "en_paul_angry",
+          "voice_key": "en_paul_angry"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "gb_oliver_neutral",
+          "voice_key": "gb_oliver_neutral"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "gb_oliver_sad",
+          "voice_key": "gb_oliver_sad"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "gb_oliver_excited",
+          "voice_key": "gb_oliver_excited"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "gb_oliver_curious",
+          "voice_key": "gb_oliver_curious"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "gb_oliver_confident",
+          "voice_key": "gb_oliver_confident"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "gb_oliver_cheerful",
+          "voice_key": "gb_oliver_cheerful"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "gb_oliver_angry",
+          "voice_key": "gb_oliver_angry"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "gb_jane_sarcasm",
+          "voice_key": "gb_jane_sarcasm"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "gb_jane_confused",
+          "voice_key": "gb_jane_confused"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "gb_jane_shameful",
+          "voice_key": "gb_jane_shameful"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "gb_jane_sad",
+          "voice_key": "gb_jane_sad"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "gb_jane_neutral",
+          "voice_key": "gb_jane_neutral"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "gb_jane_jealousy",
+          "voice_key": "gb_jane_jealousy"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "gb_jane_frustrated",
+          "voice_key": "gb_jane_frustrated"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "gb_jane_curious",
+          "voice_key": "gb_jane_curious"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "gb_jane_confident",
+          "voice_key": "gb_jane_confident"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "fr_marie_sad",
+          "voice_key": "fr_marie_sad"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "fr_marie_neutral",
+          "voice_key": "fr_marie_neutral"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "fr_marie_happy",
+          "voice_key": "fr_marie_happy"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "fr_marie_excited",
+          "voice_key": "fr_marie_excited"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "fr_marie_curious",
+          "voice_key": "fr_marie_curious"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "fr_marie_angry",
+          "voice_key": "fr_marie_angry"
+        }
+      ]
+    },
+    {
+      "available": true,
+      "display_name": "Sesame: CSM 1B",
+      "id": "sesame/csm-1b",
+      "live_name": "Sesame: CSM 1B",
+      "pricing": {
+        "completion": "0",
+        "prompt": "0.000007"
+      },
+      "short": "CSM 1B",
+      "voices": [
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "conversational_a",
+          "voice_key": "conversational_a"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "conversational_b",
+          "voice_key": "conversational_b"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "read_speech_a",
+          "voice_key": "read_speech_a"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "read_speech_b",
+          "voice_key": "read_speech_b"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "read_speech_c",
+          "voice_key": "read_speech_c"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "read_speech_d",
+          "voice_key": "read_speech_d"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "none",
+          "voice_key": "none"
+        }
+      ]
+    },
+    {
+      "available": true,
+      "display_name": "xAI: Grok Voice TTS 1.0",
+      "id": "x-ai/grok-voice-tts-1.0",
+      "live_name": "xAI: Grok Voice TTS 1.0",
+      "pricing": {
+        "completion": "0",
+        "prompt": "0.000015"
+      },
+      "short": "Grok Voice TTS 1.0",
+      "voices": [
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "eve",
+          "voice_key": "eve"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "ara",
+          "voice_key": "ara"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "rex",
+          "voice_key": "rex"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "sal",
+          "voice_key": "sal"
+        },
+        {
+          "audio_languages": [
+            "en_US",
+            "en_GB",
+            "fr_FR",
+            "de_DE",
+            "es_ES",
+            "it_IT",
+            "pt_BR",
+            "nl_NL",
+            "ja_JP",
+            "ko_KR",
+            "zh_CN",
+            "ru_RU",
+            "pl_PL",
+            "ar_AE",
+            "hi_IN",
+            "tr_TR",
+            "cs_CZ",
+            "sv_SE",
+            "da_DK",
+            "fi_FI",
+            "el_GR",
+            "he_IL",
+            "hu_HU",
+            "nb_NO",
+            "ro_RO",
+            "sk_SK",
+            "uk_UA",
+            "vi_VN",
+            "th_TH",
+            "id_ID"
+          ],
+          "gender": "Any",
+          "name": "leo",
+          "voice_key": "leo"
+        }
+      ]
+    },
+    {
+      "available": true,
+      "display_name": "Zyphra: Zonos v0.1 Hybrid",
+      "id": "zyphra/zonos-v0.1-hybrid",
+      "live_name": "Zyphra: Zonos v0.1 Hybrid",
+      "pricing": {
+        "completion": "0",
+        "prompt": "0.000007"
+      },
+      "short": "Zonos v0.1 Hybrid",
+      "voices": [
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Female",
+          "name": "american_female",
+          "voice_key": "american_female"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Male",
+          "name": "american_male",
+          "voice_key": "american_male"
+        },
+        {
+          "audio_languages": [
+            "en_GB"
+          ],
+          "gender": "Female",
+          "name": "british_female",
+          "voice_key": "british_female"
+        },
+        {
+          "audio_languages": [
+            "en_GB"
+          ],
+          "gender": "Male",
+          "name": "british_male",
+          "voice_key": "british_male"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "random",
+          "voice_key": "random"
+        }
+      ]
+    },
+    {
+      "available": true,
+      "display_name": "Zyphra: Zonos v0.1 Transformer",
+      "id": "zyphra/zonos-v0.1-transformer",
+      "live_name": "Zyphra: Zonos v0.1 Transformer",
+      "pricing": {
+        "completion": "0",
+        "prompt": "0.000007"
+      },
+      "short": "Zonos v0.1 Transformer",
+      "voices": [
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Female",
+          "name": "american_female",
+          "voice_key": "american_female"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Male",
+          "name": "american_male",
+          "voice_key": "american_male"
+        },
+        {
+          "audio_languages": [
+            "en_GB"
+          ],
+          "gender": "Female",
+          "name": "british_female",
+          "voice_key": "british_female"
+        },
+        {
+          "audio_languages": [
+            "en_GB"
+          ],
+          "gender": "Male",
+          "name": "british_male",
+          "voice_key": "british_male"
+        },
+        {
+          "audio_languages": [
+            "en_US"
+          ],
+          "gender": "Any",
+          "name": "random",
+          "voice_key": "random"
+        }
+      ]
+    }
+  ],
+  "note": "Languages/genders are inferred from each provider voice-id naming pattern; models with non-enumerable voices (e.g. MiniMax) are omitted.",
+  "skipped_models": [
+    "minimax/speech-2.8-hd",
+    "minimax/speech-2.8-turbo"
+  ],
+  "source": "OpenRouter /api/v1/models?output_modalities=speech",
+  "version": 1,
+  "voice_options": {
+    "format": {
+      "default": "mp3",
+      "type": "list",
+      "values": [
+        "mp3",
+        "ogg_opus",
+        "ogg_vorbis"
+      ]
+    },
+    "speed": {
+      "default": 1.0,
+      "max": 4.0,
+      "min": 0.25,
+      "type": "number"
+    }
+  }
+}
