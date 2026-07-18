@@ -28,7 +28,6 @@ from hypertts_addon import logging_utils
 logger = logging_utils.get_child_logger(__name__)
 
 OPENROUTER_TTS_URL = 'https://openrouter.ai/api/v1/audio/speech'
-DEFAULT_MODEL = 'mistralai/voxtral-mini-tts-2603'
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 _VOICES_JSON = os.path.join(_HERE, 'openrouter_voices.json')
@@ -103,7 +102,6 @@ def _build_voice_list() -> List[voice.TtsVoice_v3]:
 
 class OpenRouter(service.ServiceBase):
     CONFIG_API_KEY = 'api_key'
-    CONFIG_MODEL = 'model'
 
     def __init__(self):
         service.ServiceBase.__init__(self)
@@ -120,26 +118,24 @@ class OpenRouter(service.ServiceBase):
     def configuration_options(self):
         return {
             self.CONFIG_API_KEY: str,
-            self.CONFIG_MODEL: str,
         }
 
     def configure(self, config):
         self._config = config
         self.api_key = self.get_configuration_value_mandatory(self.CONFIG_API_KEY)
-        self.model = self.get_configuration_value_optional(self.CONFIG_MODEL, DEFAULT_MODEL)
 
     def voice_list(self) -> List[voice.TtsVoice_v3]:
         return self._voices
 
     def get_tts_audio(self, source_text, voice: voice.TtsVoice_v3, voice_options) -> bytes:
         api_key = self.get_configuration_value_mandatory(self.CONFIG_API_KEY)
-        # Prefer the model encoded in the voice_key; fall back to the configured
-        # model for backward compatibility.
+        # The model is always carried in the voice_key (populated from
+        # openrouter_voices.json), so each voice routes to its own model.
         if isinstance(voice.voice_key, dict):
-            model = voice.voice_key.get('model', self.model)
+            model = voice.voice_key['model']
             provider_voice = voice.voice_key.get('voice')
         else:
-            model = self.model
+            model = voice.voice_key
             provider_voice = voice.voice_key
 
         speed = voice_options.get('speed', voice.options['speed']['default'])
