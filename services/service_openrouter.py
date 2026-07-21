@@ -1,16 +1,18 @@
 # OpenRouter TTS service for HyperTTS
+# 
 # API reference: https://openrouter.ai/docs/api-reference/tts
 #
-# OpenRouter exposes an OpenAI-compatible text-to-speech endpoint:
-#   POST https://openrouter.ai/api/v1/audio/speech
-# Body: { model, input, voice, response_format, speed }
+# OpenRouter exposes an OpenAI-compatible text-to-speech endpoint:  
+# POST https://openrouter.ai/api/v1/audio/speech  
+# Body: { model, input, voice, response_format, speed }  
 # Auth: Bearer token in the Authorization header.
 #
-# The voice list is generated automatically by tools/refresh_openrouter_voices.py,
-# which queries OpenRouter's public models API (output modality "speech") and
-# writes services/openrouter_voices.json. That script is the single source of
-# truth -- run it periodically and commit the regenerated JSON. The service
-# loads that JSON at runtime; if it is missing the service reports no voices.
+# The voice list is generated automatically by
+# ../tools/refresh_openrouter_voices.py, which queries OpenRouter's public
+# models API (output modality "speech") and writes
+# ../services/openrouter_voices.json. The refresh does not happen automatically.
+# You should run the script periodically and commit the regenerated JSON. The
+# service loads that JSON at runtime.
 
 import json
 import os
@@ -49,7 +51,7 @@ _GENDER_BY_NAME = {
 
 
 def _load_models_data() -> Dict[str, Any]:
-    """Load the generated voice data written by the refresh script."""
+    """Load the voice data from JSON file."""
     if not os.path.exists(_VOICES_JSON):
         logger.warning(
             'openrouter_voices.json not found; run tools/refresh_openrouter_voices.py'
@@ -68,7 +70,7 @@ def _load_models_data() -> Dict[str, Any]:
 
 
 def _build_voice_list() -> List[voice.TtsVoice_v3]:
-    """Build the voice list across all models from the generated data."""
+    """Build the voice list across all models."""
     data = _load_models_data()
     voice_options = data['voice_options']
     voices: List[voice.TtsVoice_v3] = []

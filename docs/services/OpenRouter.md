@@ -4,12 +4,12 @@ OpenRouter is a gateway to hundreds of AI models. At the time of this writing,
 it provides access to 12 text-to-speech models.
 
 Since the list of available models, their voices, and their languages changes
-frequently, this information is not hardcoded into the service. Rather, it's
-stored in `services/openrouter_voices.json`. The service imports this JSON
-file at runtime. Therefor, it is necessary.
+frequently, voice information is not hardcoded into the service. Rather, it's
+stored in `../services/openrouter_voices.json`. The service imports this JSON
+file at runtime. Therefor, it is a necessary file.
 
 To install the OpenRouter service to your HyperTTS installation, copy **both**
-`services/service_openrouter.py` and `services/openrouter_voices.json` to
+`../services/service_openrouter.py` and `../services/openrouter_voices.json` to
 your addon directory.
 
 ## Automatic Voice Discovery
@@ -21,4 +21,10 @@ update voices is provided. Run it with Python.
 python tools/refresh_openrouter_voices.py
 ```
 
-This will automatically update `services/openrouter_voices.json`.
+This will automatically update `../services/openrouter_voices.json`.
+
+## Notes
+
+- Although Minimax models do support built-in voices, the voices are not
+  returned when requesting speech model metadata from OpenRouter. For that
+  reason, Minimax models are not supported by this service.

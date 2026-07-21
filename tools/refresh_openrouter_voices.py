@@ -1,32 +1,34 @@
 #!/usr/bin/env python3
-"""Refresh the OpenRouter voice data, fully automatically.
 
-OpenRouter exposes a public models API that lists every speech/TTS model and,
-for most providers, the exact voice ids those models accept
-(``supported_voices``). This script:
+# Refresh the OpenRouter voice data, fully automatically.
+#
+# OpenRouter exposes a public models API that lists every speech/TTS model and,
+# for most providers, the exact voice ids those models accept
+# (`supported_voices`). This script:
+# 
+#   1. Fetches all models with output modality `speech` from the OpenRouter
+#      API.
+#   2. For each model, takes its `supported_voices` list (skipping models that
+#      accept arbitrary voice ids, e.g. MiniMax, where no enumeration exists).
+#   3. Infers each voice's language and gender from the provider's voice-id
+#      *naming pattern* (a deterministic parser per provider. No
+#      hand-maintained voice catalog). Models whose pattern is unknown fall back
+#      to sensible defaults (multilingual / gender `Any`).
+#   4. Writes ../services/openrouter_voices.json, which the service loads at
+#      runtime.
+# 
+# The script needs no API key and only the Python standard library, so it runs
+# in CI without the addon installed. It is idempotent: given the same API state
+# it produces byte-identical output, and it never writes anything other than the
+# single JSON file.
+# 
+# Usage: python refresh_openrouter_voices.py
 
-  1. Fetches all models with output modality ``speech`` from the OpenRouter API.
-  2. For each model, takes its ``supported_voices`` list (skipping models that
-     accept arbitrary voice ids, e.g. MiniMax, where no enumeration exists).
-  3. Infers each voice's language and gender from the provider's voice-id
-     *naming pattern* (a deterministic parser per provider -- no hand-maintained
-     voice catalog). Models whose pattern is unknown fall back to sensible
-     defaults (multilingual / gender Any).
-  4. Writes services/openrouter_voices.json, which the service loads at runtime.
-
-The script needs no API key and only the Python standard library, so it runs in
-CI without the addon installed. It is idempotent: given the same API state it
-produces byte-identical output, and it never writes anything other than the
-single JSON file.
-
-Usage:
-    python tools/refresh_openrouter_voices.py
-"""
 import json
 import os
 import sys
 import urllib.request
-from typing import Dict, List, Optional, Tuple
+from typing import List, Tuple
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SERVICES_DIR = os.path.join(os.path.dirname(HERE), 'services')
@@ -34,7 +36,8 @@ OUTPUT_PATH = os.path.join(SERVICES_DIR, 'openrouter_voices.json')
 OPENROUTER_SPEECH_URL = 'https://openrouter.ai/api/v1/models?output_modalities=speech'
 
 # Shared voice options applied to every voice. Keys match the HyperTTS
-# options.AudioFormat enum names (mp3, ogg_opus, ogg_vorbis) and the speed slider.
+# options.AudioFormat enum names (mp3, ogg_opus, ogg_vorbis) and the speed
+# slider.
 VOICE_OPTIONS = {
     'speed': {
         'type': 'number',
@@ -70,7 +73,7 @@ LOCALE_TO_AUDIO_LANGUAGE = {
     'en-GB': 'en_GB', 'ja-JP': 'ja_JP', 'ko-KR': 'ko_KR', 'zh-CN': 'zh_CN',
 }
 
-# Map Kokoro's 2-letter prefix (gender + language) to language/gender.
+# Map Kokoro's 2-letter prefix (gender + language) to language/gender.  
 # First letter = language family, second letter = f (female) / m (male).
 KOKORO_LANG = {
     'a': 'en_US',  # American English
@@ -94,8 +97,8 @@ def _fetch_speech_models() -> List[dict]:
 def _parse_voice(provider: str, voice_id: str) -> Tuple[str, List[str]]:
     """Return (gender, [audio_language_names]) inferred from the voice id.
 
-    ``gender`` is one of 'Male', 'Female', 'Any'. This is a deterministic parser
-    per provider's naming convention -- not a curated voice list.
+    `gender` is one of 'Male', 'Female', 'Any'. This is a deterministic parser
+    per provider's naming convention.
     """
     # Zonos: american_female / british_male / random
     if provider.startswith('zyphra/zonos'):
