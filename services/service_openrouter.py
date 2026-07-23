@@ -16,7 +16,11 @@
 
 import json
 import os
+import re
+import tempfile
+import wave
 import requests
+import aqt.sound
 from typing import List, Dict, Any
 
 from hypertts_addon import voice
@@ -48,6 +52,53 @@ _GENDER_BY_NAME = {
     'Female': constants.Gender.Female,
     'Any': constants.Gender.Any,
 }
+
+_ONLY_SUPPORTS_RESPONSE_FORMAT_RE = re.compile(
+    r'only supports response_format="([a-zA-Z0-9_\-]+)"',
+    re.IGNORECASE,
+)
+
+
+def _extract_required_response_format(response: requests.Response) -> str | None:
+    """Extract required response_format from OpenRouter 400 error text, if present."""
+    try:
+        body = response.json()
+    except ValueError:
+        body = None
+
+    message = ''
+    if isinstance(body, dict):
+        error = body.get('error')
+        if isinstance(error, dict):
+            message = str(error.get('message', ''))
+    if not message:
+        message = response.text or ''
+
+    match = _ONLY_SUPPORTS_RESPONSE_FORMAT_RE.search(message)
+    if not match:
+        return None
+    return match.group(1).lower()
+
+
+def _encode_pcm24khz_mono16_to_mp3(pcm_bytes: bytes) -> bytes:
+    """Convert raw 24kHz/16-bit/mono PCM bytes to MP3 using Anki's encoder."""
+    wav_fh, wav_path = tempfile.mkstemp(prefix='hypertts_openrouter_', suffix='.wav')
+    os.close(wav_fh)
+    mp3_fh, mp3_path = tempfile.mkstemp(prefix='hypertts_openrouter_', suffix='.mp3')
+    os.close(mp3_fh)
+    try:
+        with wave.open(wav_path, 'wb') as wav_file:
+            wav_file.setnchannels(1)
+            wav_file.setsampwidth(2)
+            wav_file.setframerate(24000)
+            wav_file.writeframes(pcm_bytes)
+        aqt.sound._encode_mp3(wav_path, mp3_path)
+        with open(mp3_path, 'rb') as mp3_file:
+            return mp3_file.read()
+    finally:
+        for path in (wav_path, mp3_path):
+            if os.path.exists(path):
+                os.remove(path)
 
 
 def _load_models_data() -> Dict[str, Any]:
@@ -165,6 +216,7 @@ class OpenRouter(service.ServiceBase):
             'response_format': response_format,
             'speed': speed,
         }
+        final_response_format = response_format
 
         try:
             response = requests.post(
@@ -177,6 +229,34 @@ class OpenRouter(service.ServiceBase):
             raise errors.ServiceTimeoutError(source_text, voice, str(e)) from e
         except requests.exceptions.ConnectionError as e:
             raise errors.ServiceConnectionError(source_text, voice, str(e)) from e
+
+        # Some providers (e.g. Gemini) reject the OpenAI-default mp3 response
+        # format and require a model-specific format such as pcm.
+        if response.status_code == 400:
+            required_response_format = _extract_required_response_format(response)
+            if (
+                required_response_format is not None
+                and required_response_format != payload['response_format']
+            ):
+                retry_payload = dict(payload)
+                retry_payload['response_format'] = required_response_format
+                logger.info(
+                    'OpenRouter model %s requires response_format=%s; retrying request',
+                    model,
+                    required_response_format,
+                )
+                try:
+                    response = requests.post(
+                        OPENROUTER_TTS_URL,
+                        json=retry_payload,
+                        headers=headers,
+                        timeout=60,
+                    )
+                    final_response_format = required_response_format
+                except requests.exceptions.Timeout as e:
+                    raise errors.ServiceTimeoutError(source_text, voice, str(e)) from e
+                except requests.exceptions.ConnectionError as e:
+                    raise errors.ServiceConnectionError(source_text, voice, str(e)) from e
 
         if response.status_code in (401, 403):
             raise errors.ServicePermissionError(
@@ -210,5 +290,20 @@ class OpenRouter(service.ServiceBase):
             raise errors.UnknownServiceError(
                 source_text, voice, f'OpenRouter error: HTTP {response.status_code}: {response.text}'
             )
+        if final_response_format == 'pcm':
+            if audio_format != options.AudioFormat.mp3:
+                raise errors.ServiceInputError(
+                    source_text,
+                    voice,
+                    'OpenRouter model returned PCM audio; only mp3 output is supported for PCM-only models',
+                )
+            try:
+                return _encode_pcm24khz_mono16_to_mp3(response.content)
+            except Exception as exc:  # noqa: BLE001
+                raise errors.RequestError(
+                    source_text,
+                    voice,
+                    f'OpenRouter PCM to MP3 conversion failed: {exc}',
+                ) from exc
 
         return response.content
