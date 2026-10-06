@@ -3,24 +3,27 @@
 # API reference:
 # - speech: https://docs.mistral.ai/api/endpoint/audio/speech
 # - voices: https://docs.mistral.ai/api/endpoint/audio/voices
+# - models: https://docs.mistral.ai/api/endpoint/models
 #
 # POST https://api.mistral.ai/v1/audio/speech
 # Body: { model, input, voice_id, response_format }
 # Response: JSON { "audio_data": "<base64 encoded audio>" }
 # Auth: Bearer token in the Authorization header.
 #
-# Voices:
-# - the preset voices provided by Mistral are listed below.
-# - custom voices (created in Mistral AI Studio or with POST /v1/audio/voices) are fetched
-#   from the user's account using the configured API key, and show up in the voice list
-#   with a "(custom)" suffix. They are identified by their voice id.
-#
-# Voxtral supports cross-lingual speech: every voice can speak any of the supported
-# languages, so each voice is listed under all of them, starting with its native language.
+# Everything is retrieved from the Mistral API with the configured API key, so that new
+# voices, models and languages show up without updating this file:
+# - voices: GET /v1/audio/voices returns the preset voices provided by Mistral and the user's
+#   custom voices (created in Mistral AI Studio or with POST /v1/audio/voices). Custom voices
+#   show up with a "(custom)" suffix.
+# - models: GET /v1/models, keeping the Voxtral models which can generate speech.
+# - languages: Voxtral supports cross-lingual speech, every voice can speak every supported
+#   language. The API doesn't list the languages a model supports, so the documented ones are
+#   listed below, and any language a voice is tagged with is added to them. Each voice is listed
+#   under all of them, starting with its own languages.
 
 import base64
-import time
 import requests
+import cachetools
 from typing import List, Optional
 
 from hypertts_addon import voice
@@ -35,15 +38,20 @@ logger = logging_utils.get_child_logger(__name__)
 
 MISTRAL_SPEECH_URL = 'https://api.mistral.ai/v1/audio/speech'
 MISTRAL_VOICES_URL = 'https://api.mistral.ai/v1/audio/voices'
-
-DEFAULT_MODEL = 'voxtral-mini-tts-2603'
-MODELS = [DEFAULT_MODEL, 'voxtral-mini-tts-latest']
+MISTRAL_MODELS_URL = 'https://api.mistral.ai/v1/models'
 
 # the voice list is requested when Anki starts, don't block for too long
-VOICES_REQUEST_TIMEOUT = 10
-# custom voices are re-fetched after this delay, so that newly created voices show up
-CUSTOM_VOICES_CACHE_SECONDS = 600
+REQUEST_TIMEOUT = 10
+# the voice list is re-fetched after this delay
+VOICE_LIST_CACHE_SECONDS = 600
 VOICES_PAGE_SIZE = 100
+
+# alias of the most recent stable model, maintained by Mistral. it's the default model, and the
+# only one listed if the model list can't be retrieved
+DEFAULT_MODEL = 'voxtral-mini-tts-latest'
+# Mistral also exposes customer specific speech models, only list the generally available ones
+MODEL_PREFIX = 'voxtral-mini-tts-'
+MODEL_EXCLUDE_PATTERNS = ['solutions']
 
 # Mistral returns Ogg-wrapped Opus for response_format=opus
 AUDIO_FORMAT_MAP = {
@@ -51,54 +59,14 @@ AUDIO_FORMAT_MAP = {
     options.AudioFormat.ogg_opus: 'opus',
 }
 
-VOICE_OPTIONS = {
-    'model': {
-        'type': options.ParameterType.list.name,
-        'values': MODELS,
-        'default': DEFAULT_MODEL,
-    },
-    options.AUDIO_FORMAT_PARAMETER: {
-        'type': options.ParameterType.list.name,
-        'values': [audio_format.name for audio_format in AUDIO_FORMAT_MAP],
-        'default': options.AudioFormat.mp3.name,
-    },
-}
+# languages documented as supported by Voxtral TTS, extended with the languages of the voices
+# returned by the API. https://docs.mistral.ai/capabilities/audio/text_to_speech
+DOCUMENTED_LANGUAGES = ['en_us', 'en_gb', 'fr', 'es', 'de', 'it', 'pt_pt', 'pt_br', 'nl', 'hi', 'ar']
 
-SUPPORTED_AUDIO_LANGUAGES = [
-    languages.AudioLanguage.en_US,
-    languages.AudioLanguage.en_GB,
-    languages.AudioLanguage.fr_FR,
-    languages.AudioLanguage.es_ES,
-    languages.AudioLanguage.de_DE,
-    languages.AudioLanguage.it_IT,
-    languages.AudioLanguage.pt_PT,
-    languages.AudioLanguage.pt_BR,
-    languages.AudioLanguage.nl_NL,
-    languages.AudioLanguage.hi_IN,
-    languages.AudioLanguage.ar_XA,
-]
-
-# language codes returned by the voices API: "en", "fr", or "en_us", "fr_fr", ...
-LANGUAGE_CODE_MAP = {
-    'en': languages.AudioLanguage.en_US,
-    'en_us': languages.AudioLanguage.en_US,
-    'en_gb': languages.AudioLanguage.en_GB,
-    'fr': languages.AudioLanguage.fr_FR,
-    'fr_fr': languages.AudioLanguage.fr_FR,
-    'es': languages.AudioLanguage.es_ES,
-    'es_es': languages.AudioLanguage.es_ES,
-    'de': languages.AudioLanguage.de_DE,
-    'de_de': languages.AudioLanguage.de_DE,
-    'it': languages.AudioLanguage.it_IT,
-    'it_it': languages.AudioLanguage.it_IT,
-    'pt': languages.AudioLanguage.pt_PT,
-    'pt_pt': languages.AudioLanguage.pt_PT,
-    'pt_br': languages.AudioLanguage.pt_BR,
-    'nl': languages.AudioLanguage.nl_NL,
-    'nl_nl': languages.AudioLanguage.nl_NL,
-    'hi': languages.AudioLanguage.hi_IN,
-    'hi_in': languages.AudioLanguage.hi_IN,
-    'ar': languages.AudioLanguage.ar_XA,
+# language codes which don't match a HyperTTS language name
+LANGUAGE_ALIASES = {
+    'pt': 'pt_pt',
+    'zh': 'zh_cn',
 }
 
 GENDER_MAP = {
@@ -106,49 +74,41 @@ GENDER_MAP = {
     'female': constants.Gender.Female,
 }
 
-# (voice_id, display name, gender, native language)
-PRESET_VOICES = [
-    ('en_paul_neutral', 'Paul - Neutral', 'male', 'en_us'),
-    ('en_paul_happy', 'Paul - Happy', 'male', 'en_us'),
-    ('en_paul_cheerful', 'Paul - Cheerful', 'male', 'en_us'),
-    ('en_paul_confident', 'Paul - Confident', 'male', 'en_us'),
-    ('en_paul_excited', 'Paul - Excited', 'male', 'en_us'),
-    ('en_paul_sad', 'Paul - Sad', 'male', 'en_us'),
-    ('en_paul_frustrated', 'Paul - Frustrated', 'male', 'en_us'),
-    ('en_paul_angry', 'Paul - Angry', 'male', 'en_us'),
-    ('gb_oliver_neutral', 'Oliver - Neutral', 'male', 'en_gb'),
-    ('gb_oliver_cheerful', 'Oliver - Cheerful', 'male', 'en_gb'),
-    ('gb_oliver_confident', 'Oliver - Confident', 'male', 'en_gb'),
-    ('gb_oliver_curious', 'Oliver - Curious', 'male', 'en_gb'),
-    ('gb_oliver_excited', 'Oliver - Excited', 'male', 'en_gb'),
-    ('gb_oliver_sad', 'Oliver - Sad', 'male', 'en_gb'),
-    ('gb_oliver_angry', 'Oliver - Angry', 'male', 'en_gb'),
-    ('gb_jane_neutral', 'Jane - Neutral', 'female', 'en_gb'),
-    ('gb_jane_confident', 'Jane - Confident', 'female', 'en_gb'),
-    ('gb_jane_curious', 'Jane - Curious', 'female', 'en_gb'),
-    ('gb_jane_confused', 'Jane - Confused', 'female', 'en_gb'),
-    ('gb_jane_sarcasm', 'Jane - Sarcasm', 'female', 'en_gb'),
-    ('gb_jane_sad', 'Jane - Sad', 'female', 'en_gb'),
-    ('gb_jane_shameful', 'Jane - Shameful', 'female', 'en_gb'),
-    ('gb_jane_jealousy', 'Jane - Jealousy', 'female', 'en_gb'),
-    ('gb_jane_frustrated', 'Jane - Frustrated', 'female', 'en_gb'),
-    ('fr_marie_neutral', 'Marie - Neutral', 'female', 'fr_fr'),
-    ('fr_marie_happy', 'Marie - Happy', 'female', 'fr_fr'),
-    ('fr_marie_curious', 'Marie - Curious', 'female', 'fr_fr'),
-    ('fr_marie_excited', 'Marie - Excited', 'female', 'fr_fr'),
-    ('fr_marie_sad', 'Marie - Sad', 'female', 'fr_fr'),
-    ('fr_marie_angry', 'Marie - Angry', 'female', 'fr_fr'),
-]
+
+def to_audio_language(code) -> Optional[languages.AudioLanguage]:
+    """convert a language code returned by the voices API ("fr", "en_us", "pt-BR") to an
+    AudioLanguage. returns None for a language HyperTTS doesn't know about."""
+    code = str(code).strip().replace('-', '_')
+    parts = code.split('_')
+    if len(parts) == 2:
+        try:
+            return languages.AudioLanguage[f'{parts[0].lower()}_{parts[1].upper()}']
+        except KeyError:
+            pass
+    # "fr", or a locale HyperTTS doesn't have: use the default locale of the language
+    for language_name in [code.lower(), parts[0].lower(), LANGUAGE_ALIASES.get(parts[0].lower())]:
+        if language_name in languages.Language.__members__:
+            return languages.AudioLanguageDefaults.get(languages.Language[language_name])
+    return None
 
 
-def _audio_languages(language_codes) -> List[languages.AudioLanguage]:
-    """the voice's own languages first, followed by all the other supported languages"""
-    native = []
-    for code in language_codes or []:
-        audio_language = LANGUAGE_CODE_MAP.get(str(code).lower().replace('-', '_'))
-        if audio_language is not None and audio_language not in native:
-            native.append(audio_language)
-    return native + [l for l in SUPPORTED_AUDIO_LANGUAGES if l not in native]
+def unique_audio_languages(codes) -> List[languages.AudioLanguage]:
+    result = []
+    for code in codes or []:
+        audio_language = to_audio_language(code)
+        if audio_language is None:
+            logger.warning(f'Mistral: unknown language code {code}')
+        elif audio_language not in result:
+            result.append(audio_language)
+    return result
+
+
+def is_speech_model(model) -> bool:
+    model_id = model.get('id', '')
+    return (model.get('capabilities', {}).get('audio_speech', False)
+            and model_id.startswith(MODEL_PREFIX)
+            and not any(pattern in model_id for pattern in MODEL_EXCLUDE_PATTERNS)
+            and model.get('deprecation') is None)
 
 
 class Mistral(service.ServiceBase):
@@ -156,9 +116,6 @@ class Mistral(service.ServiceBase):
 
     def __init__(self):
         service.ServiceBase.__init__(self)
-        self._custom_voices_cache_key: Optional[str] = None
-        self._custom_voices_cache_time = 0.0
-        self._custom_voices: List[voice.TtsVoice_v3] = []
 
     @property
     def service_type(self) -> constants.ServiceType:
@@ -177,66 +134,104 @@ class Mistral(service.ServiceBase):
         self._config = config
         self.api_key = self.get_configuration_value_mandatory(self.CONFIG_API_KEY)
 
-    def _build_voice(self, name, voice_id, gender, language_codes) -> voice.TtsVoice_v3:
-        return voice.TtsVoice_v3(
-            name=name,
-            gender=GENDER_MAP.get(str(gender).lower(), constants.Gender.Any),
-            audio_languages=_audio_languages(language_codes),
-            service=self.name,
-            voice_key={'voice_id': voice_id},
-            options=VOICE_OPTIONS,
-            service_fee=self.service_fee,
-        )
+    def _get(self, api_key, url, params=None):
+        response = requests.get(url, params=params, timeout=REQUEST_TIMEOUT,
+                                headers={'Authorization': f'Bearer {api_key}'})
+        response.raise_for_status()
+        return response.json()
 
-    def _preset_voices(self) -> List[voice.TtsVoice_v3]:
-        return [self._build_voice(name, voice_id, gender, [language])
-                for voice_id, name, gender, language in PRESET_VOICES]
-
-    def _fetch_custom_voices(self, api_key) -> List[voice.TtsVoice_v3]:
-        headers = {'Authorization': f'Bearer {api_key}'}
+    def _fetch_voices(self, api_key) -> list:
+        """preset and custom voices, following pagination"""
         result = []
         offset = 0
         while True:
-            response = requests.get(
-                MISTRAL_VOICES_URL,
-                params={'type': 'custom', 'limit': VOICES_PAGE_SIZE, 'offset': offset},
-                headers=headers,
-                timeout=VOICES_REQUEST_TIMEOUT,
-            )
-            response.raise_for_status()
-            data = response.json()
+            data = self._get(api_key, MISTRAL_VOICES_URL,
+                             params={'limit': VOICES_PAGE_SIZE, 'offset': offset})
             items = data.get('items', [])
-            for item in items:
-                voice_name = item.get('name') or item['id']
-                result.append(self._build_voice(
-                    f'{voice_name} (custom)', item['id'], item.get('gender'), item.get('languages')))
+            result.extend(items)
             offset += len(items)
             if len(items) == 0 or offset >= data.get('total', 0):
                 return result
 
-    def _custom_voice_list(self) -> List[voice.TtsVoice_v3]:
+    def _fetch_models(self, api_key) -> List[str]:
+        # each alias is listed as a separate model (voxtral-mini-tts-3 / voxtral-mini-tts-3-0),
+        # keep the canonical name, plus the "latest" alias maintained by Mistral, used by default
+        models = set()
+        for model in self._get(api_key, MISTRAL_MODELS_URL).get('data', []):
+            if is_speech_model(model) and (model['id'] == model.get('name') or model['id'] == DEFAULT_MODEL):
+                models.add(model['id'])
+        others = sorted(models - {DEFAULT_MODEL}, reverse=True)
+        return ([DEFAULT_MODEL] if DEFAULT_MODEL in models else []) + others
+
+    def _voice_options(self, models: List[str]) -> dict:
+        return {
+            'model': {
+                'type': options.ParameterType.list.name,
+                'values': models,
+                'default': models[0],
+            },
+            options.AUDIO_FORMAT_PARAMETER: {
+                'type': options.ParameterType.list.name,
+                'values': [audio_format.name for audio_format in AUDIO_FORMAT_MAP],
+                'default': options.AudioFormat.mp3.name,
+            },
+        }
+
+    def _build_voice_list(self, api_key) -> List[voice.TtsVoice_v3]:
+        voice_items = self._fetch_voices(api_key)
+        try:
+            models = self._fetch_models(api_key)
+        except Exception as e:
+            logger.warning(f'Mistral: could not retrieve the model list: {e}')
+            models = []
+        voice_options = self._voice_options(models or [DEFAULT_MODEL])
+
+        # every voice speaks every language, also add the languages Mistral tagged voices with
+        all_languages = unique_audio_languages(DOCUMENTED_LANGUAGES)
+        for item in voice_items:
+            for audio_language in unique_audio_languages(item.get('languages')):
+                if audio_language not in all_languages:
+                    all_languages.append(audio_language)
+
+        result = []
+        for item in voice_items:
+            custom = item.get('type') == 'custom'
+            name = item.get('name') or item['id']
+            if custom:
+                name = f'{name} (custom)'
+            native_languages = unique_audio_languages(item.get('languages'))
+            result.append(voice.TtsVoice_v3(
+                name=name,
+                gender=GENDER_MAP.get(str(item.get('gender')).lower(), constants.Gender.Any),
+                audio_languages=native_languages + [l for l in all_languages if l not in native_languages],
+                service=self.name,
+                # preset voices are identified by their slug (e.g. fr_marie_neutral) which, unlike
+                # their id, is stable and readable. custom voices only have an id.
+                voice_key={'voice_id': item['id'] if custom else (item.get('slug') or item['id'])},
+                options=voice_options,
+                service_fee=self.service_fee,
+            ))
+        return sorted(result, key=lambda v: (v.name.endswith('(custom)'), v.name))
+
+    @cachetools.cached(cache=cachetools.TTLCache(maxsize=4, ttl=VOICE_LIST_CACHE_SECONDS),
+                       key=lambda self, api_key: api_key)
+    def _voice_list_cached(self, api_key) -> List[voice.TtsVoice_v3]:
+        try:
+            return self._build_voice_list(api_key)
+        except Exception as e:
+            logger.warning(f'Mistral: could not retrieve the voice list: {e}')
+            return []
+
+    def voice_list(self) -> List[voice.TtsVoice_v3]:
         api_key = self._config.get(self.CONFIG_API_KEY)
         if not api_key:
             return []
-        cache_expired = time.monotonic() - self._custom_voices_cache_time > CUSTOM_VOICES_CACHE_SECONDS
-        if api_key != self._custom_voices_cache_key or cache_expired:
-            try:
-                self._custom_voices = self._fetch_custom_voices(api_key)
-            except Exception as e:
-                # keep the previous list, the preset voices remain usable
-                logger.warning(f'Mistral: could not retrieve custom voices: {e}')
-            # also cache failures, to avoid repeatedly waiting on the API
-            self._custom_voices_cache_key = api_key
-            self._custom_voices_cache_time = time.monotonic()
-        return self._custom_voices
-
-    def voice_list(self) -> List[voice.TtsVoice_v3]:
-        return self._preset_voices() + self._custom_voice_list()
+        return self._voice_list_cached(api_key)
 
     def get_tts_audio(self, source_text, voice: voice.TtsVoice_v3, voice_options) -> bytes:
         api_key = self.get_configuration_value_mandatory(self.CONFIG_API_KEY)
 
-        model = voice_options.get('model', VOICE_OPTIONS['model']['default'])
+        model = voice_options.get('model', voice.options['model']['default'])
         audio_format_str = voice_options.get(
             options.AUDIO_FORMAT_PARAMETER, options.AudioFormat.mp3.name)
         audio_format = options.AudioFormat[audio_format_str]
@@ -278,6 +273,8 @@ class Mistral(service.ServiceBase):
             # 400: invalid model / arguments, 404: voice not found, 422: validation error
             if status in (400, 404, 422):
                 raise errors.ServiceInputError(source_text, voice, message)
+            if status == 502:
+                raise errors.ServiceGatewayError(source_text, voice, message)
             raise errors.UnknownServiceError(source_text, voice, message)
 
         try:

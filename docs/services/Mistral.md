@@ -17,14 +17,20 @@ Then in `Tools` > `HyperTTS: Services Configuration`, enable `Mistral` and enter
 
 ## Voices
 
+The voices and models are retrieved from your Mistral account with your API key, so new voices,
+models and languages released by Mistral show up without updating the extension. New voices and
+models appear after restarting Anki.
+
 - **Preset voices**: the voices provided by Mistral (Paul, Oliver, Jane, Marie, in different
   emotions).
 - **Custom voices**: voices you created in [Mistral AI Studio](https://console.mistral.ai/) or with
-  the [voices API](https://docs.mistral.ai/api/endpoint/audio/voices) are retrieved from your
-  account with your API key, and show up with a `(custom)` suffix. New voices appear after restarting
-  Anki (or within 10 minutes).
+  the [voices API](https://docs.mistral.ai/api/endpoint/audio/voices), shown with a `(custom)`
+  suffix.
+
+Every voice can speak every supported language, so voices are listed as multilingual.
 
 ## Options
 
-- `model`: the Voxtral TTS model, `voxtral-mini-tts-2603` by default.
+- `model`: the Voxtral TTS model. `voxtral-mini-tts-latest` (default) is the most recent stable
+  model; the other models available on your account are listed too.
 - `format`: `mp3` (default) or `ogg_opus`.
