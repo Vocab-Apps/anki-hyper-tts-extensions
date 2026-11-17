@@ -54,7 +54,7 @@ _GENDER_BY_NAME = {
 }
 
 _ONLY_SUPPORTS_RESPONSE_FORMAT_RE = re.compile(
-    r'only supports response_format="([a-zA-Z0-9_\-]+)"',
+    r'only supports response_format\s*=?\s*["\']?([a-zA-Z0-9_\-]+)["\']?',
     re.IGNORECASE,
 )
 
@@ -80,8 +80,24 @@ def _extract_required_response_format(response: requests.Response) -> str | None
     return match.group(1).lower()
 
 
-def _encode_pcm24khz_mono16_to_mp3(pcm_bytes: bytes) -> bytes:
-    """Convert raw 24kHz/16-bit/mono PCM bytes to MP3 using Anki's encoder."""
+# PCM sample rates differ per provider: Gemini returns 24 kHz, HeyGen
+# returns 44.1 kHz. Labeling the WAV with the wrong rate plays the audio
+# slow and pitched down, so the rate must match the model.
+_PCM_SAMPLE_RATE_BY_MODEL_PREFIX = {
+    'heygen/': 44100,
+}
+_PCM_SAMPLE_RATE_DEFAULT = 24000
+
+
+def _pcm_sample_rate(model: str) -> int:
+    for prefix, rate in _PCM_SAMPLE_RATE_BY_MODEL_PREFIX.items():
+        if model.startswith(prefix):
+            return rate
+    return _PCM_SAMPLE_RATE_DEFAULT
+
+
+def _encode_pcm_mono16_to_mp3(pcm_bytes: bytes, sample_rate: int) -> bytes:
+    """Convert raw mono 16-bit PCM bytes to MP3 using Anki's encoder."""
     wav_fh, wav_path = tempfile.mkstemp(prefix='hypertts_openrouter_', suffix='.wav')
     os.close(wav_fh)
     mp3_fh, mp3_path = tempfile.mkstemp(prefix='hypertts_openrouter_', suffix='.mp3')
@@ -90,7 +106,7 @@ def _encode_pcm24khz_mono16_to_mp3(pcm_bytes: bytes) -> bytes:
         with wave.open(wav_path, 'wb') as wav_file:
             wav_file.setnchannels(1)
             wav_file.setsampwidth(2)
-            wav_file.setframerate(24000)
+            wav_file.setframerate(sample_rate)
             wav_file.writeframes(pcm_bytes)
         aqt.sound._encode_mp3(wav_path, mp3_path)
         with open(mp3_path, 'rb') as mp3_file:
@@ -298,7 +314,7 @@ class OpenRouter(service.ServiceBase):
                     'OpenRouter model returned PCM audio; only mp3 output is supported for PCM-only models',
                 )
             try:
-                return _encode_pcm24khz_mono16_to_mp3(response.content)
+                return _encode_pcm_mono16_to_mp3(response.content, _pcm_sample_rate(model))
             except Exception as exc:  # noqa: BLE001
                 raise errors.RequestError(
                     source_text,
