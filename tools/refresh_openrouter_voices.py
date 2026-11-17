@@ -71,6 +71,30 @@ ISO2_TO_AUDIO_LANGUAGE = {
 LOCALE_TO_AUDIO_LANGUAGE = {
     'en-US': 'en_US', 'es-MX': 'es_ES', 'fr-FR': 'fr_FR', 'de-DE': 'de_DE',
     'en-GB': 'en_GB', 'ja-JP': 'ja_JP', 'ko-KR': 'ko_KR', 'zh-CN': 'zh_CN',
+    'cs-CZ': 'cs_CZ', 'da-DK': 'da_DK', 'en-AU': 'en_AU', 'en-IN': 'en_IN',
+    'es-ES': 'es_ES', 'fi-FI': 'fi_FI', 'hi-IN': 'hi_IN', 'hu-HU': 'hu_HU',
+    'id-ID': 'id_ID', 'it-IT': 'it_IT', 'nb-NO': 'nb_NO', 'nl-NL': 'nl_NL',
+    'pl-PL': 'pl_PL', 'pt-BR': 'pt_BR', 'pt-PT': 'pt_PT', 'ro-RO': 'ro_RO',
+    'ru-RU': 'ru_RU', 'sv-SE': 'sv_SE', 'th-TH': 'th_TH', 'tr-TR': 'tr_TR',
+    'vi-VN': 'vi_VN',
+}
+
+# Voxtral preset voices encode the language as a 2-letter prefix
+# (en_paul_*, gb_oliver_*, fr_marie_*). The opaque voice_NNN ids carry no
+# language information and fall back to en_US.
+VOXTRAL_LANG = {
+    'en': 'en_US', 'gb': 'en_GB', 'fr': 'fr_FR', 'de': 'de_DE', 'es': 'es_ES',
+    'it': 'it_IT', 'pt': 'pt_PT', 'nl': 'nl_NL', 'ja': 'ja_JP', 'ko': 'ko_KR',
+    'zh': 'zh_CN', 'ru': 'ru_RU', 'pl': 'pl_PL', 'ar': 'ar_AE', 'hi': 'hi_IN',
+    'tr': 'tr_TR', 'cs': 'cs_CZ', 'sv': 'sv_SE', 'da': 'da_DK', 'fi': 'fi_FI',
+    'el': 'el_GR', 'he': 'he_IL', 'hu': 'hu_HU', 'no': 'nb_NO', 'ro': 'ro_RO',
+    'sk': 'sk_SK', 'uk': 'uk_UA', 'vi': 'vi_VN', 'th': 'th_TH', 'id': 'id_ID',
+}
+
+# ElevenLabs models whose description says "English-only" (eleven-turbo-v2,
+# eleven-flash-v2). All other ElevenLabs models are multilingual.
+ELEVENLABS_ENGLISH_ONLY = {
+    'elevenlabs/eleven-turbo-v2', 'elevenlabs/eleven-flash-v2',
 }
 
 # Map Kokoro's 2-letter prefix (gender + language) to language/gender.  
@@ -117,16 +141,61 @@ def _parse_voice(provider: str, voice_id: str) -> Tuple[str, List[str]]:
         return gender, [lang]
 
     # Microsoft MAI-Voice: en-US-Harper:MAI-Voice-2
+    # (locale is the first two dash-separated parts, e.g. cs-CZ)
     if provider.startswith('microsoft/mai-voice'):
-        locale = voice_id.split('-', 1)[0]
+        parts = voice_id.split('-')
+        locale = '-'.join(parts[:2]) if len(parts) >= 2 else parts[0]
         lang = LOCALE_TO_AUDIO_LANGUAGE.get(locale, 'en_US')
         return 'Any', [lang]
 
-    # Deepgram Aura-2: aura-2-thalia-en  (suffix is a 2-letter ISO code)
-    if provider.startswith('deepgram/aura'):
+    # Deepgram Aura-2 / Flux: aura-2-thalia-en / flux-alexis-en
+    # (suffix is a 2-letter ISO code)
+    if provider.startswith('deepgram/'):
         iso = voice_id.rsplit('-', 1)[-1]
         lang = ISO2_TO_AUDIO_LANGUAGE.get(iso, 'en_US')
         return 'Any', [lang]
+
+    # Mistral Voxtral: en_paul_neutral / gb_oliver_sad / fr_marie_happy
+    # (2-letter language prefix); voice_NNN ids have no language info.
+    if provider.startswith('mistralai/voxtral'):
+        prefix = voice_id.split('_', 1)[0]
+        lang = VOXTRAL_LANG.get(prefix, 'en_US')
+        return 'Any', [lang]
+
+    # MiniMax: English_<descriptor> (e.g. English_radiant_girl). The
+    # descriptor sometimes encodes gender (girl/lady/woman vs man/boy).
+    if provider.startswith('minimax/'):
+        lowered = voice_id.lower()
+        if any(w in lowered for w in ('girl', 'lady', 'woman')):
+            gender = 'Female'
+        elif any(w in lowered for w in ('man', 'boy')):
+            gender = 'Male'
+        else:
+            gender = 'Any'
+        return gender, ['en_US']
+
+    # ElevenLabs: bare first names (george, sarah, ...). Multilingual
+    # models auto-detect; the two English-only models stay en_US.
+    if provider.startswith('elevenlabs/'):
+        if provider in ELEVENLABS_ENGLISH_ONLY:
+            return 'Any', ['en_US']
+        return 'Any', list(MULTILINGUAL)
+
+    # Speechify Simba: one model covers 48 languages, chosen per request.
+    if provider.startswith('speechify/'):
+        return 'Any', list(MULTILINGUAL)
+
+    # AssemblyAI: multilingual library; voice ids (aai-*) encode nothing.
+    if provider.startswith('assemblyai/'):
+        return 'Any', list(MULTILINGUAL)
+
+    # Qwen-Audio: Chinese voices (loongjohn, longanlingxin, ...).
+    if provider.startswith('qwen/'):
+        return 'Any', ['zh_CN']
+
+    # HeyGen: English default voices (nadine, bram, ...).
+    if provider.startswith('heygen/'):
+        return 'Any', ['en_US']
 
     # Kokoro 82M: af_alloy / bm_george / zf_xiaobei
     if provider.startswith('hexgrad/kokoro'):
