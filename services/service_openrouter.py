@@ -57,6 +57,10 @@ _ONLY_SUPPORTS_RESPONSE_FORMAT_RE = re.compile(
     r'only supports response_format\s*=?\s*["\']?([a-zA-Z0-9_\-]+)["\']?',
     re.IGNORECASE,
 )
+_SUPPORTED_RESPONSE_FORMATS_RE = re.compile(
+    r'response_format.*?\bSupported:\s*([a-zA-Z0-9_,\s\-]+)',
+    re.IGNORECASE,
+)
 
 
 def _extract_required_response_format(response: requests.Response) -> str | None:
@@ -75,9 +79,21 @@ def _extract_required_response_format(response: requests.Response) -> str | None
         message = response.text or ''
 
     match = _ONLY_SUPPORTS_RESPONSE_FORMAT_RE.search(message)
+    if match:
+        return match.group(1).lower()
+
+    match = _SUPPORTED_RESPONSE_FORMATS_RE.search(message)
     if not match:
         return None
-    return match.group(1).lower()
+
+    supported_formats = [
+        response_format.strip().lower()
+        for response_format in match.group(1).split(',')
+        if response_format.strip()
+    ]
+    if 'pcm' in supported_formats:
+        return 'pcm'
+    return supported_formats[0] if supported_formats else None
 
 
 # PCM sample rates differ per provider: Gemini returns 24 kHz, HeyGen
